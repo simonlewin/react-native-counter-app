@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import moment from 'moment';
 
 import Button from './Button';
+import ResetButton from './ResetButton';
 
 const min = 0;
 const max = 10;
@@ -55,6 +56,19 @@ export default class App extends React.Component {
     }
   }
 
+  resetCount = () => {
+    this.setState({ 
+      count: 0,
+      decDisabled: true,
+    });    
+  }
+
+  resetHistory = () => {
+    this.setState({ 
+      history: []
+    });    
+  }
+
   render() {
     const { count, history } = this.state;
 
@@ -81,6 +95,20 @@ export default class App extends React.Component {
             label={'+'}
             onPress={this.onPressInc}
             disabled={this.state.incDisabled} 
+          />
+          </View>
+          <View style={styles.buttonContainer}>
+            <ResetButton 
+            backgroundColor='#5a2961' 
+            underlayColor='#DDDDDD' 
+            label={'Reset Count'}
+            onPress={this.resetCount}
+          />
+          <ResetButton 
+            backgroundColor='#5a2961' 
+            underlayColor='#DDDDDD' 
+            label={'Reset History'}
+            onPress={this.resetHistory}
           />
         </View>
         <Text style={styles.historyHeading}>
