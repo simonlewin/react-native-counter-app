@@ -81,9 +81,9 @@ export default class App extends React.Component {
             onPress={this.onPressInc}
             disabled={isIncDisabled} 
           />
-          </View>
-          <View style={styles.buttonContainer}>
-            <ResetButton 
+        </View>
+        <View style={styles.buttonContainer}>
+          <ResetButton 
             label={'Reset Count'}
             onPress={this.resetCount}
           />
