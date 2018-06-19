@@ -1,15 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-const Button = ({ backgroundColor, underlayColor, label, onPress, disabled }) => {
+const Button = ({ label, onPress, disabled }) => {
   const btnStyle = {
-    backgroundColor: !disabled ? backgroundColor : '#AAAAAA'
+    backgroundColor: !disabled ? '#5a2961' : '#AAAAAA'
   }
 
   return(
     <TouchableHighlight 
       style={[styles.btn, btnStyle]} 
-      underlayColor={underlayColor}
+      underlayColor='#DDDDDD'
       onPress={onPress}
       disabled={disabled}
     >

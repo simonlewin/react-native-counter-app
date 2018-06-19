@@ -58,8 +58,8 @@ export default class App extends React.Component {
 
   render() {
     const { count, history } = this.state;
-    // const isDecDisabled = count === min;
-    // const isIncDisabled = count === max;
+    const isDecDisabled = count === min;
+    const isIncDisabled = count === max;
 
     return (
       <View style={styles.container}>
@@ -69,33 +69,25 @@ export default class App extends React.Component {
         <Image style={styles.image} source={source} />
         <View style={styles.buttonContainer}>
           <Button 
-            backgroundColor='#5a2961' 
-            underlayColor='#DDDDDD' 
             label={'-'}
             onPress={this.onPressDec}  
-            disabled={count === min} 
+            disabled={isDecDisabled} 
           />
           <Text style={styles.count}>
             {count}
           </Text>
           <Button 
-            backgroundColor='#5a2961' 
-            underlayColor='#DDDDDD' 
             label={'+'}
             onPress={this.onPressInc}
-            disabled={count === max} 
+            disabled={isIncDisabled} 
           />
           </View>
           <View style={styles.buttonContainer}>
             <ResetButton 
-            backgroundColor='#5a2961' 
-            underlayColor='#DDDDDD' 
             label={'Reset Count'}
             onPress={this.resetCount}
           />
           <ResetButton 
-            backgroundColor='#5a2961' 
-            underlayColor='#DDDDDD' 
             label={'Reset History'}
             onPress={this.resetHistory}
           />

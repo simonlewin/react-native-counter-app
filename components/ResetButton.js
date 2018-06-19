@@ -1,15 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-const ResetButton = ({ backgroundColor, underlayColor, label, onPress }) => {
-  const buttonStyle = {
-    backgroundColor
-  }
-
+const ResetButton = ({ label, onPress }) => {
   return(
     <TouchableHighlight 
-      style={[styles.btn, buttonStyle]} 
-      underlayColor={underlayColor}
+      style={styles.btn} 
+      underlayColor='#DDDDDD'
       onPress={onPress}
     >
       <Text style={styles.label}>{label}</Text>
@@ -25,6 +21,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 20,
     borderRadius: 5,
+    backgroundColor: '#5a2961',    
   },
   label: { 
     color: '#FFFFFF',
