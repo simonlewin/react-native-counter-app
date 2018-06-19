@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import moment from 'moment';
 
-import Button from './Button';
-import ResetButton from './ResetButton';
+import Button from './components/Button';
+import ResetButton from './components/ResetButton';
 
 const min = 0;
 const max = 10;
@@ -14,8 +14,6 @@ export default class App extends React.Component {
 
     this.state = {
       count: 0,
-      incDisabled: false,
-      decDisabled: true,
       history: [],
     }
   }
@@ -28,14 +26,9 @@ export default class App extends React.Component {
     if (count < max) {
       this.setState({ 
         count: count + 1,
-        decDisabled: false,
         history: history.concat([`${str}: Incremented from ${ count } to ${ count + 1 }`])
       });  
-    } else {
-      this.setState({ 
-        incDisabled: true,
-      });  
-    }
+    } 
   }
 
   onPressDec = () => {
@@ -46,20 +39,14 @@ export default class App extends React.Component {
     if (count > min) {
       this.setState({ 
         count: count - 1,
-        incDisabled: false,
         history: history.concat([`${str}: Decremented from ${ count } to ${ count - 1 }`])
       });  
-    } else {
-      this.setState({ 
-        decDisabled: true,
-      });  
-    }
+    } 
   }
 
   resetCount = () => {
     this.setState({ 
       count: 0,
-      decDisabled: true,
     });    
   }
 
@@ -71,6 +58,8 @@ export default class App extends React.Component {
 
   render() {
     const { count, history } = this.state;
+    // const isDecDisabled = count === min;
+    // const isIncDisabled = count === max;
 
     return (
       <View style={styles.container}>
@@ -84,7 +73,7 @@ export default class App extends React.Component {
             underlayColor='#DDDDDD' 
             label={'-'}
             onPress={this.onPressDec}  
-            disabled={this.state.decDisabled} 
+            disabled={count === min} 
           />
           <Text style={styles.count}>
             {count}
@@ -94,7 +83,7 @@ export default class App extends React.Component {
             underlayColor='#DDDDDD' 
             label={'+'}
             onPress={this.onPressInc}
-            disabled={this.state.incDisabled} 
+            disabled={count === max} 
           />
           </View>
           <View style={styles.buttonContainer}>
