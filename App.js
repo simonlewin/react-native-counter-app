@@ -21,12 +21,18 @@ export default class App extends React.Component {
   onPressInc = () => {
     const { count, history } = this.state;
 
-    const str = moment().calendar();
-
     if (count < max) {
       this.setState({ 
         count: count + 1,
-        history: history.concat([`${str}: Incremented from ${ count } to ${ count + 1 }`])
+        history: [
+          {
+            timestamp: Date.now(),
+            operation: 'inc',
+            counterBefore: count,
+            counterAfter: count + 1,
+          },
+          ...history
+        ]
       });  
     } 
   }
@@ -39,7 +45,15 @@ export default class App extends React.Component {
     if (count > min) {
       this.setState({ 
         count: count - 1,
-        history: history.concat([`${str}: Decremented from ${ count } to ${ count - 1 }`])
+        history: [
+          {
+            timestamp: Date.now(),
+            operation: 'dec',
+            counterBefore: count,
+            counterAfter: count - 1,
+          },
+          ...history
+        ]
       });  
     } 
   }
@@ -96,7 +110,16 @@ export default class App extends React.Component {
           History
         </Text>
         <ScrollView style={styles.scroll}>
-          { history.map((item, idx) => <Text key={idx} style={styles.history}>{item}</Text>) }
+          { history.map(
+            (item, idx) => {
+              const timestampDisplay = moment(item.timestamp).calendar();
+              const operationDisplay = item.operation === 'inc' ? 'Incremented' : 'Decremented';
+              const label = `${ timestampDisplay }: ${ operationDisplay } from ${item.counterBefore} to ${item.counterAfter}`;
+              return (
+                <Text key={idx} style={styles.history}>{label}</Text>
+              ); 
+            }
+          )}
         </ScrollView>
       </View>
     );
